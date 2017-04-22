@@ -24,6 +24,9 @@
         },
         "sort-packages": true
     },
+    "require": {
+        "dusank/knapsack": "^9.0"
+    },
     "require-dev": {
         "phpspec/phpspec": "^3.2"
     },
