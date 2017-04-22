@@ -1,0 +1,4 @@
+suites:
+    io_suite:
+        namespace: Roukmoute\IO
+        psr4_prefix: Roukmoute\IO
