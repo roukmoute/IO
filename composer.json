@@ -1,0 +1,32 @@
+{
+    "name": "roukmoute/io",
+    "description": "The roukmoute/io namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mathias STRASSSER",
+            "email": "conctact@roukmoute.fr"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Roukmoute\\IO\\": "src"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "7.1"
+        },
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
