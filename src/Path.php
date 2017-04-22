@@ -109,6 +109,37 @@ class Path
     }
 
     /**
+     * Gets a value indicating whether the specified path string contains a root.
+     *
+     * A path is considered rooted if it starts with a backslash ("\")
+     * or a drive letter and a colon (":").
+     *
+     * @param string $path  The path to test.
+     *
+     * @return bool         true if path contains a root; otherwise, false.
+     */
+    public static function isPathRooted(string $path): bool
+    {
+        if ($path != null) {
+            self::checkInvalidPathChars($path);
+
+            $pathLength = mb_strlen($path);
+            if (($pathLength >= 1 &&
+                    (
+                        $path[0] == self::DIRECTORY_SEPARATOR_CHAR
+                        || $path[0] == self::ALTDIRECTORY_SEPARATOR_CHAR
+                    )
+                )
+                || ($pathLength >= 2 && $path[1] == self::VOLUME_SEPARATOR_CHAR)
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Check if contains one or more of the invalid characters
      * defined in invalidPathChars.
      */

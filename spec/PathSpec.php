@@ -99,4 +99,16 @@ class PathSpec extends ObjectBehavior
     {
         $this::invalidPathChars()->shouldBeArray();
     }
+
+    public function it_confirms_a_path_rooted()
+    {
+        $this::isPathRooted("C:\\mydir\\myfile.ext")->shouldBe(true);
+        $this::isPathRooted("C:MyDir")->shouldBe(true);
+        $this::isPathRooted("\\myPc\\mydir\\myfile")->shouldBe(true);
+    }
+
+    public function it_does_not_confirm_a_path_rooted()
+    {
+        $this::isPathRooted("mydir\\sudir\\")->shouldBe(false);
+    }
 }
