@@ -111,4 +111,38 @@ class PathSpec extends ObjectBehavior
     {
         $this::isPathRooted("mydir\\sudir\\")->shouldBe(false);
     }
+
+    public function it_combines_two_simple_strings()
+    {
+        $this::combine("c:\\temp", "subdir\\file.txt")
+             ->shouldBe("c:\\temp" . DIRECTORY_SEPARATOR . "subdir\\file.txt");
+    }
+
+    public function it_combines_two_complex_strings_into_a_path()
+    {
+        $this::combine("c:^*&)(_=@#'\\^&#2.*(.txt", "subdir\\file.txt")
+             ->shouldBe("c:^*&)(_=@#'\\^&#2.*(.txt" . DIRECTORY_SEPARATOR . "subdir\\file.txt");
+    }
+
+    public function it_combines_without_first_path()
+    {
+        $this::combine("", "usb_mode-switch.d/myfile.com.extension")
+             ->shouldBe("usb_mode-switch.d/myfile.com.extension");
+    }
+
+    public function it_combines_without_second_path()
+    {
+        $this::combine("MacVolume:System Folder\\", "")->shouldBe("MacVolume:System Folder\\");
+    }
+
+    public function it_combines_with_an_absolute_second_path()
+    {
+        $this::combine("MacVolume:System Folder\\", "C:\\mydir\\")->shouldBe("C:\\mydir\\");
+    }
+
+    public function it_combines_without_directory_separator()
+    {
+        $this::combine("/etc/usb_mode-switch.d", "subdir/myfile.com")
+             ->shouldBe("/etc/usb_mode-switch.d" . DIRECTORY_SEPARATOR . "subdir/myfile.com");
+    }
 }

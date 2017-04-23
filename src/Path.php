@@ -140,6 +140,50 @@ class Path
     }
 
     /**
+     * Combines two strings into a path.
+     *
+     * @param string $path1 The first path to combine.
+     * @param string $path2 The second path to combine.
+     *
+     * @return string       The combined paths.
+     *                      If one of the specified paths is a zero-length string,
+     *                      this method returns the other path.
+     *                      If path2 contains an absolute path,
+     *                      this method returns path2.
+     */
+    public static function combine(string $path1, string $path2): string
+    {
+        self::hasIllegalCharacter($path1);
+        self::hasIllegalCharacter($path2);
+
+        if (mb_strlen($path2) == 0) {
+            return $path1;
+        }
+
+        if (mb_strlen($path1) == 0) {
+            return $path2;
+        }
+
+        if (self::isPathRooted($path2)) {
+            return $path2;
+        }
+
+        if (!in_array(
+            $path1[mb_strlen($path1) - 1],
+            [
+                self::DIRECTORY_SEPARATOR_CHAR,
+                self::ALTDIRECTORY_SEPARATOR_CHAR,
+                self::VOLUME_SEPARATOR_CHAR,
+            ]
+        )
+        ) {
+            return "$path1" . DIRECTORY_SEPARATOR . "$path2";
+        }
+
+        return $path1 . $path2;
+    }
+
+    /**
      * Check if contains one or more of the invalid characters
      * defined in invalidPathChars.
      */
